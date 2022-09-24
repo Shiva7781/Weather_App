@@ -1,0 +1,104 @@
+.Search {
+    /* border: 1px solid gray; */
+    display: flex;
+    border-radius: 7px;
+    margin: 7px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.Search:hover {
+    border: 1px solid gray;
+}
+
+.Location_Icon {
+    width: 35px;
+    height: 35px;
+    margin: 7px;
+    margin-right: 0%;
+    /* border: 1px solid red; */
+    /* cursor: pointer; */
+}
+
+.Search_Input {
+    border: none;
+    outline: none;
+    width: 85%;
+    font-weight: bold;
+    /* border: 1px solid red; */
+}
+
+.Search_Button {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    margin: 7px;
+    padding: 7px;
+
+    /* border: 1px solid red; */
+}
+
+.Forecast {
+    display: flex;
+    /* flex-wrap: wrap; */
+    margin: 7px;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    border: 1px solid red;
+}
+
+.Day_Forecast {
+    width: max-content;
+    /* height: 200px; */
+    border: 1px solid red;
+}
+
+.Bottom {
+    margin-left: 7px;
+    margin-right: 7px;
+    border-radius: 7px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.Bottom_Top {
+    display: flex;
+    margin: 11px;
+}
+
+.Bottom_Top p {
+    margin: 11px;
+}
+
+.Graph {
+    display: grid;
+    margin: 11px;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.Graph p {
+    margin: 7px;
+}
+
+.Two_Way {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.Single {
+    width: 150px;
+    margin: auto;
+    border: 1px solid red;
+}
+
+.Single h2 {
+    margin-bottom: -21px;
+}
+
+.Sun {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
