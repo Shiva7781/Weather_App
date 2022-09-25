@@ -3,6 +3,7 @@ import "./Weather.css";
 import WeatherCard from "./WeatherCard";
 import axios from "axios";
 import Chartjs from "./Chartjs";
+import Forecast from "./Forecast";
 
 const Weather = () => {
   const [searchValue, setSearchValue] = useState("Dubai");
@@ -73,83 +74,11 @@ const Weather = () => {
         ></img>
       </div>
 
-      <div className="Forecast">
-        <div className="Day_Forecast">
-          <p>Sun</p>
-          <p>28, 19</p>
-          <img
-            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
-          ></img>
-          <p> {tempInfo.weathermood}</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Wed</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Thu</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Fri</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Sat</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
+      <div>
+        <Forecast tempInfo={tempInfo} />
       </div>
-
-      <WeatherCard tempInfo={tempInfo} />
-      <div className="Bottom">
-        <div className="Bottom_Top">
-          <h1>26 °C</h1>
-          <img
-            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
-          ></img>
-        </div>
-
-        <div className="Graph">
-          <Chartjs />
-        </div>
-
-        <div className="Two_Way">
-          <div className="Single">
-            <div>
-              <h3> Pressure </h3>
-              <h4> 1013 hpa </h4>
-            </div>
-          </div>
-          <div className="Single">
-            <div>
-              <h3> Humidiy </h3>
-              <h4> 93 % </h4>
-            </div>
-          </div>
-        </div>
-
-        <div className="Sun">
-          <div className="Rise_Set">
-            <h3>Sunrise</h3>
-            <p>{MyLocalTime} </p>
-          </div>
-          <div className="Rise_Set">
-            <h3>Sunset</h3>
-            <p>{MyLocalTime} </p>
-          </div>
-        </div>
-
-        <div className="SunMovement">
-          <h3>SUN_MOVEMENT</h3>
-        </div>
+      <div>
+        <WeatherCard tempInfo={tempInfo} />
       </div>
     </>
   );

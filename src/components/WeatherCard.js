@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chartjs from "./Chartjs";
+import "./Weather.css";
 
 const WeatherCard = ({ tempInfo }) => {
   const [weatherSate, setWeatherState] = useState("");
@@ -11,6 +12,7 @@ const WeatherCard = ({ tempInfo }) => {
     humidity,
     pressure,
     weathermood,
+    icon,
     name,
     country,
     sunrise,
@@ -52,11 +54,13 @@ const WeatherCard = ({ tempInfo }) => {
   console.log("MyLocalTime:", MyLocalTime);
 
   return (
-    <div>
-      {/* <div className="Bottom">
+    <>
+      <div className="Bottom">
         <div className="Bottom_Top">
           <h1>26 °C</h1>
-          <h1>icon</h1>
+          <img
+            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
+          ></img>
         </div>
 
         <div className="Graph">
@@ -65,31 +69,35 @@ const WeatherCard = ({ tempInfo }) => {
 
         <div className="Two_Way">
           <div className="Single">
-            <h2> Pressure </h2>
-            <h3> 1013 hpa </h3>
+            <div>
+              <h3> Pressure </h3>
+              <h4> 1013 hpa </h4>
+            </div>
           </div>
           <div className="Single">
-            <h2> Humiditi </h2>
-            <h3> 93 % </h3>
+            <div>
+              <h3> Humidiy </h3>
+              <h4> 93 % </h4>
+            </div>
           </div>
         </div>
 
         <div className="Sun">
-          <div>
-            <h2>Sunrise</h2>
-            <p>{MyLocalTime} am</p>
+          <div className="Rise_Set">
+            <h3>Sunrise</h3>
+            <p>{MyLocalTime} </p>
           </div>
-          <div>
-            <h2>Sunset</h2>
-            <p>{MyLocalTime} am</p>
+          <div className="Rise_Set">
+            <h3>Sunset</h3>
+            <p>{MyLocalTime} </p>
           </div>
         </div>
 
         <div className="SunMovement">
-          <h1>SUN</h1>
+          <h3>SUN_MOVEMENT</h3>
         </div>
-      </div> */}
-    </div>
+      </div>
+    </>
   );
 };
 
