@@ -6,15 +6,15 @@ const WeatherCard = ({ tempInfo }) => {
   const [weatherSate, setWeatherState] = useState("");
 
   const {
-    lon,
-    lat,
-    temp,
-    humidity,
-    pressure,
+    // lon,
+    // lat,
+    // temp,
+    // humidity,
+    // pressure,
     weathermood,
     icon,
-    name,
-    country,
+    // name,
+    // country,
     sunrise,
     sunset,
   } = tempInfo;
@@ -50,16 +50,20 @@ const WeatherCard = ({ tempInfo }) => {
   let dateS = new Date(secS * 1000);
   let timeS = `${dateS.getHours()}:${dateS.getMinutes()}`;
 
-  let MyLocalTime = new Date().toLocaleTimeString();
-  console.log("MyLocalTime:", MyLocalTime);
+  // let MyLocalTime = new Date().toLocaleTimeString();
+  // console.log("MyLocalTime:", MyLocalTime);
 
   return (
     <>
       <div className="Bottom">
         <div className="Bottom_Top">
-          <h1>26 °C</h1>
+          {/* <h1>{Temperature} °C</h1> */}
+          <h1>{Math.floor(tempInfo.temp)}°C</h1>
           <img
-            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
+            src={
+              "http://openweathermap.org/img/wn/" + icon + ".png"
+            }
+            alt="S"
           ></img>
         </div>
 
@@ -69,27 +73,23 @@ const WeatherCard = ({ tempInfo }) => {
 
         <div className="Two_Way">
           <div className="Single">
-            <div>
-              <h3> Pressure </h3>
-              <h4> 1013 hpa </h4>
-            </div>
+            <h3> Pressure </h3>
+            <h4> {tempInfo.pressure} hpa</h4>
           </div>
           <div className="Single">
-            <div>
-              <h3> Humidiy </h3>
-              <h4> 93 % </h4>
-            </div>
+            <h3> Humidiy </h3>
+            <h4> {tempInfo.humidity} %</h4>
           </div>
         </div>
 
         <div className="Sun">
           <div className="Rise_Set">
             <h3>Sunrise</h3>
-            <p>{MyLocalTime} </p>
+            <p>{timeR}am</p>
           </div>
           <div className="Rise_Set">
             <h3>Sunset</h3>
-            <p>{MyLocalTime} </p>
+            <p>{timeS}pm</p>
           </div>
         </div>
 

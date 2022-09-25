@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Weather.css";
-import WeatherCard from "./WeatherCard";
 import axios from "axios";
-import Chartjs from "./Chartjs";
 import Forecast from "./Forecast";
+import WeatherCard from "./WeatherCard";
 
 const Weather = () => {
-  const [searchValue, setSearchValue] = useState("Dubai");
+  const [searchValue, setSearchValue] = useState("pune");
   const [tempInfo, setTempInfo] = useState({});
+  const [nextEight, SetNextEight] = useState([]);
 
   useEffect(() => {
     axios
@@ -16,15 +16,12 @@ const Weather = () => {
       )
       .then((res) => {
         // console.log(res.data);
-
         const { lon, lat } = res.data.coord;
         const { temp, humidity, pressure } = res.data.main;
-        const { main: weathermood, icon } = res.data.weather[0];
+        const { main: weathermood, icon, id } = res.data.weather[0];
         const { name } = res.data;
         const { country, sunrise, sunset } = res.data.sys;
-
-        console.log(`lon${lon} lat${lat}`);
-
+        // console.log(`lon${lon} lat${lat}`);
         const myNewWeatherInfo = {
           lon,
           lat,
@@ -33,18 +30,33 @@ const Weather = () => {
           pressure,
           weathermood,
           icon,
+          id,
           name,
           country,
           sunrise,
           sunset,
         };
-
-        console.log(myNewWeatherInfo);
+        console.log("myNewWeatherInfo", myNewWeatherInfo);
         setTempInfo(myNewWeatherInfo);
+
+        EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
       });
   }, []);
 
-  console.log(searchValue);
+  // console.log(searchValue);
+
+  const EightDay = async (lat, lon) => {
+    // console.log(lat, lon);
+
+    let response = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&cnt=6&appid=a77df68bcd9e098229cb3c8e6441dfbc&units=metric`
+    );
+    let data = await response.json();
+    // console.log("data:", data);
+
+    SetNextEight([...data.daily]);
+    // console.log(nextEight);
+  };
 
   // let MyLocalTime = new Date().toLocaleTimeString();
 
@@ -70,12 +82,12 @@ const Weather = () => {
           src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png"
           alt="Search"
           className="Search_Button"
-          onClick={() => console.log("first")}
+          onClick={() => console.log("Click")}
         ></img>
       </div>
 
       <div>
-        <Forecast tempInfo={tempInfo} />
+        <Forecast tempInfo={tempInfo} nextEight={nextEight} />
       </div>
       <div>
         <WeatherCard tempInfo={tempInfo} />

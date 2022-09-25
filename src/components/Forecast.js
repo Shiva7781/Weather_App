@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Weather.css";
 
-const Forecast = ({ tempInfo }) => {
+const Forecast = ({ tempInfo, nextEight }) => {
   const {
     lon,
     lat,
@@ -9,47 +10,37 @@ const Forecast = ({ tempInfo }) => {
     pressure,
     weathermood,
     icon,
+    id,
     name,
     country,
     sunrise,
     sunset,
   } = tempInfo;
 
+  // console.log(tempInfo);
+  // console.log(lat, lon);
+  console.log(nextEight);
+  // console.log(nextEight[0].weather[0].icon);
+
   return (
     <>
-      <div className="Forecast">
-        <div className="Day_Forecast">
-          <p>Sun</p>
-          <p>28, 19</p>
-          <img
-            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
-          ></img>
-          <p> {tempInfo.weathermood}</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Wed</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Thu</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Fri</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
-        <div className="Day_Forecast">
-          <p>Sat</p>
-          <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
-        </div>
+      <div className="Seven_Forecast">
+        {nextEight.map((e, i) => {
+          return (
+            <div key={i} className="Day_Forecast">
+              <h3>{e.weather[0].icon}</h3>
+              <h3>{e.temp.day}</h3>
+              <img
+                src={
+                  "http://openweathermap.org/img/wn/" +
+                  e.weather[0].icon +
+                  ".png"
+                }
+              ></img>
+              <p>{weathermood}</p>
+            </div>
+          );
+        })}
       </div>
     </>
   );

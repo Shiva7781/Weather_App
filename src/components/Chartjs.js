@@ -45,7 +45,9 @@ const Chartjs = () => {
         backgroundColor: "white",
         borderColor: "rgb(28,169,244)",
         tension: "0.5",
-
+        pointStyle: "circle",
+        pointRadius: 5,
+        pointBorderWidth: 3,
         // fill: true,
       },
     ],

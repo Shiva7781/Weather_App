@@ -3,7 +3,6 @@
     display: flex;
     border-radius: 7px;
     margin: 7px;
-    margin-top: 14px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
@@ -18,7 +17,6 @@
     margin: 7px;
     margin-right: 0%;
     /* border: 1px solid red; */
-    /* cursor: pointer; */
 }
 
 .Search_Input {
@@ -37,27 +35,38 @@
     padding: 7px;
     background: none;
     border: none;
-
     /* border: 1px solid red; */
 }
 
-.Forecast {
-    display: flex;
-    /* flex-wrap: wrap; */
+.Seven_Forecast {
+    /* height: 175px; */
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
     margin: 7px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    align-items: center;
-    justify-content: center;
-
+    padding: 7px;
     overflow-x: scroll;
     /* border: 1px solid red; */
 }
 
 .Day_Forecast {
-    /* width: max-content; */
-    width: 75px;
-    height: fit-content;
+    width: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.Day_Forecast:hover {
+    border: 3px solid teal;
+}
+
+.Day_Forecast h3 {
+    margin: 0px;
+}
+
+.Day_Forecast img {
+    width: 51px;
+    height: 51px;
     /* border: 1px solid red; */
 }
 
@@ -70,45 +79,68 @@
 }
 
 .Bottom_Top {
-    display: flex;
+    height: 75px;
+    margin: 7px;
+    margin-bottom: 0px;
     font-size: x-large;
-    margin: 11px;
-    margin-bottom: -22px;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.Bottom_Top h1 {
+    height: 75px;
+    margin: 7px;
+    /* border: 1px solid red; */
+}
+
+.Bottom_Top img {
+    margin-left: 21px;
+    width: 77px;
+    height: 77px;
+    display: flex;
+    justify-content: center;
     /* border: 1px solid red; */
 }
 
 .Graph {
+    height: fit-content;
     margin: 7px;
-    /* display: grid; */
-    /* grid-template-columns: repeat(6, 1fr); */
+    margin-top: 0px;
     /* border: 1px solid red; */
 }
 
 .Two_Way {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* margin: 7px; */
-    margin-top: 15px;
+    margin: 7px;
+    margin-top: 14px;
     /* border: 1px solid red; */
 }
 
 .Single {
-    width: 150px;
+    width: 165px;
     margin: auto;
     padding-bottom: 3px;
-    /* border: 1px solid red; */
     background-color: rgb(243, 251, 255);
+    /* border: 1px solid red; */
 }
 
 .Single h3,
 h4 {
     margin: 0px;
+    text-align: left;
+    height: 21px;
+    margin-left: 11px;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
 }
 
 .Sun {
     display: flex;
-    margin: 22px;
-    margin-top: 15px;
+    margin: 11px;
+    align-items: center;
     justify-content: space-between;
     /* border: 1px solid red; */
 }
@@ -116,6 +148,11 @@ h4 {
 .Rise_Set h3,
 p {
     margin: 0px;
+    text-align: left;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
 }
 
 .SunMovement {
