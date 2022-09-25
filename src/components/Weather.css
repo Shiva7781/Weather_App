@@ -3,6 +3,7 @@
     display: flex;
     border-radius: 7px;
     margin: 7px;
+    margin-top: 14px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
@@ -29,12 +30,13 @@
 }
 
 .Search_Button {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
+    margin: 7px;
+    margin-left: 0%;
+    padding: 7px;
     background: none;
     border: none;
-    margin: 7px;
-    padding: 7px;
 
     /* border: 1px solid red; */
 }
@@ -43,17 +45,20 @@
     display: flex;
     /* flex-wrap: wrap; */
     margin: 7px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     align-items: center;
     justify-content: center;
 
-    overflow: hidden;
-    border: 1px solid red;
+    overflow-x: scroll;
+    /* border: 1px solid red; */
 }
 
 .Day_Forecast {
-    width: max-content;
-    /* height: 200px; */
-    border: 1px solid red;
+    /* width: max-content; */
+    width: 75px;
+    height: fit-content;
+    /* border: 1px solid red; */
 }
 
 .Bottom {
@@ -66,39 +71,54 @@
 
 .Bottom_Top {
     display: flex;
+    font-size: x-large;
     margin: 11px;
-}
-
-.Bottom_Top p {
-    margin: 11px;
+    margin-bottom: -22px;
+    /* border: 1px solid red; */
 }
 
 .Graph {
-    display: grid;
-    margin: 11px;
-    grid-template-columns: repeat(6, 1fr);
-}
-
-.Graph p {
     margin: 7px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(6, 1fr); */
+    /* border: 1px solid red; */
 }
 
 .Two_Way {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    /* margin: 7px; */
+    margin-top: 15px;
+    /* border: 1px solid red; */
 }
 
 .Single {
     width: 150px;
     margin: auto;
-    border: 1px solid red;
+    padding-bottom: 3px;
+    /* border: 1px solid red; */
+    background-color: rgb(243, 251, 255);
 }
 
-.Single h2 {
-    margin-bottom: -21px;
+.Single h3,
+h4 {
+    margin: 0px;
 }
 
 .Sun {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    margin: 22px;
+    margin-top: 15px;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+}
+
+.Rise_Set h3,
+p {
+    margin: 0px;
+}
+
+.SunMovement {
+    margin: 7px;
+    padding: 7px;
 }

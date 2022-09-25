@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Weather.css";
 import WeatherCard from "./WeatherCard";
 import axios from "axios";
+import Chartjs from "./Chartjs";
 
 const Weather = () => {
-  const [searchValue, setSearchValue] = useState("pune");
+  const [searchValue, setSearchValue] = useState("Dubai");
   const [tempInfo, setTempInfo] = useState({});
 
   useEffect(() => {
@@ -15,16 +16,22 @@ const Weather = () => {
       .then((res) => {
         // console.log(res.data);
 
+        const { lon, lat } = res.data.coord;
         const { temp, humidity, pressure } = res.data.main;
-        const { main: weathermood } = res.data.weather[0];
+        const { main: weathermood, icon } = res.data.weather[0];
         const { name } = res.data;
         const { country, sunrise, sunset } = res.data.sys;
 
+        console.log(`lon${lon} lat${lat}`);
+
         const myNewWeatherInfo = {
+          lon,
+          lat,
           temp,
           humidity,
           pressure,
           weathermood,
+          icon,
           name,
           country,
           sunrise,
@@ -42,7 +49,7 @@ const Weather = () => {
 
   return (
     <>
-      <div>Weather_App</div>
+      {/* <div>Weather_App</div> */}
 
       <div className="Search">
         <img
@@ -54,9 +61,8 @@ const Weather = () => {
           className="Search_Input"
           type="search"
           placeholder="Search..."
-          autoFocus
           autoComplete="off"
-          id="search"
+          value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <img
@@ -71,10 +77,11 @@ const Weather = () => {
         <div className="Day_Forecast">
           <p>Sun</p>
           <p>28, 19</p>
-          <p>Icon</p>
-          <p>Name</p>
+          <img
+            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
+          ></img>
+          <p> {tempInfo.weathermood}</p>
         </div>
-
         <div className="Day_Forecast">
           <p>Wed</p>
           <p>28, 19</p>
@@ -104,39 +111,44 @@ const Weather = () => {
       <WeatherCard tempInfo={tempInfo} />
       <div className="Bottom">
         <div className="Bottom_Top">
-          <h1>26 C</h1>
-          <h1>icon</h1>
+          <h1>26 °C</h1>
+          <img
+            src={"http://openweathermap.org/img/wn/" + tempInfo.icon + ".png"}
+          ></img>
         </div>
+
         <div className="Graph">
-          <p>Hellow</p>
-          <p>Hellow</p>
-          <p>Hellow</p>
-          <p>Hellow</p>
-          <p>Hellow</p>
-          <p>Hellow</p>
+          <Chartjs />
         </div>
+
         <div className="Two_Way">
           <div className="Single">
-            <h2> Pressure </h2>
-            <h3> 1013 hpa </h3>
+            <div>
+              <h3> Pressure </h3>
+              <h4> 1013 hpa </h4>
+            </div>
           </div>
           <div className="Single">
-            <h2> Humiditi </h2>
-            <h3> 93 % </h3>
+            <div>
+              <h3> Humidiy </h3>
+              <h4> 93 % </h4>
+            </div>
           </div>
         </div>
+
         <div className="Sun">
-          <div>
-            <h2>Sunrise</h2>
-            <p>{MyLocalTime} am</p>
+          <div className="Rise_Set">
+            <h3>Sunrise</h3>
+            <p>{MyLocalTime} </p>
           </div>
-          <div>
-            <h2>Sunset</h2>
-            <p>{MyLocalTime} am</p>
+          <div className="Rise_Set">
+            <h3>Sunset</h3>
+            <p>{MyLocalTime} </p>
           </div>
         </div>
+
         <div className="SunMovement">
-          <h1>SUN</h1>
+          <h3>SUN_MOVEMENT</h3>
         </div>
       </div>
     </>
