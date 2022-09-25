@@ -86,7 +86,7 @@ p {
     font-size: x-large;
     display: flex;
     align-items: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .Bottom_Top h1 {
@@ -105,7 +105,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .Graph {
