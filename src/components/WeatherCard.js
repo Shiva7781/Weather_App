@@ -59,12 +59,12 @@ const WeatherCard = ({ tempInfo }) => {
         <div className="Bottom_Top">
           {/* <h1>{Temperature} °C</h1> */}
           <h1>{Math.floor(tempInfo.temp)}°C</h1>
-          <img
-            src={
-              "http://openweathermap.org/img/wn/" + icon + ".png"
-            }
-            alt="S"
-          ></img>
+          <div className="Big_Icon">
+            <img
+              src={"http://openweathermap.org/img/wn/" + icon + ".png"}
+              alt="S"
+            ></img>
+          </div>
         </div>
 
         <div className="Graph">

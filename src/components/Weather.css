@@ -42,17 +42,22 @@
     /* height: 175px; */
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    margin: 7px;
-    padding: 7px;
+    margin: 11px;
     overflow-x: scroll;
     /* border: 1px solid red; */
 }
 
 .Day_Forecast {
-    width: 15vh;
+    width: 101px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* border: 1px solid red; */
+}
+
+.Day_Forecast h3,
+p {
+    margin: auto;
     /* border: 1px solid red; */
 }
 
@@ -60,13 +65,10 @@
     border: 3px solid teal;
 }
 
-.Day_Forecast h3 {
-    margin: 0px;
-}
+
 
 .Day_Forecast img {
-    width: 51px;
-    height: 51px;
+    width: 75%;
     /* border: 1px solid red; */
 }
 
@@ -79,13 +81,12 @@
 }
 
 .Bottom_Top {
-    height: 75px;
     margin: 7px;
     margin-bottom: 0px;
     font-size: x-large;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 
 .Bottom_Top h1 {
@@ -94,13 +95,17 @@
     /* border: 1px solid red; */
 }
 
-.Bottom_Top img {
-    margin-left: 21px;
-    width: 77px;
-    height: 77px;
+/* .Big_Icon {
+    border: 1px solid red;
+} */
+
+.Big_Icon img {
+    width: 107px;
+    height: 107px;
     display: flex;
     justify-content: center;
-    /* border: 1px solid red; */
+    align-items: center;
+    border: 1px solid red;
 }
 
 .Graph {
