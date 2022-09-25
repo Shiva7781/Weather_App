@@ -46,7 +46,7 @@ const Weather = () => {
 
   console.log(searchValue);
 
-  let MyLocalTime = new Date().toLocaleTimeString();
+  // let MyLocalTime = new Date().toLocaleTimeString();
 
   return (
     <>
