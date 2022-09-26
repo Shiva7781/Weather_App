@@ -29,7 +29,7 @@ const Forecast = ({ tempInfo, nextEight, tempChart }) => {
           return (
             <div key={i} className="Day_Forecast">
               {/* <h3>{e.weather[0].icon}</h3> */}
-              {/* <h3>{i === 0 ? "Today" : "Day" + " " + Number(i + 1)}</h3> */}
+              <h3>{i === 0 ? "Today" : "Day" + " " + Number(i + 1)}</h3>
               <h3>{e.temp.day}</h3>
               <img
                 src={
