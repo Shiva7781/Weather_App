@@ -24,16 +24,31 @@ ChartJS.register(
   // Filler
 );
 
-const Chartjs = () => {
+const Chartjs = ({ nextEight, tempChart }) => {
+  // console.log("Chart", nextEight);
+  console.log("tempChart", tempChart);
+
+  const initialState2 = [25, 27, 29, 30, 28, 27];
+
+  const initialState = initialState2.map((e) => {
+    var min = e - 4;
+    var max = e + 5;
+
+    return Math.floor(Math.random() * (+max - +min) + +min);
+  });
+  console.log("initialState:", initialState);
+
   const [labels, setLabels] = useState([
-    "jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Dec",
+    "9am",
+    "10am",
+    "11am",
+    "12pm",
+    "1pm",
+    "2pm",
   ]);
-  const [tempData, setTempData] = useState([50, 100, 150, 10, 77, 55]);
+
+  const [tempData, setTempData] = useState([...initialState]);
+  // setTempData(initialState);
 
   const [data, setData] = useState({
     labels,

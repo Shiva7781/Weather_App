@@ -1,49 +1,57 @@
 import React, { useState, useEffect } from "react";
 import "./Weather.css";
-import axios from "axios";
 import Forecast from "./Forecast";
 import WeatherCard from "./WeatherCard";
 
 const Weather = () => {
-  const [searchValue, setSearchValue] = useState("pune");
+  const [searchValue, setSearchValue] = useState("Pune");
   const [tempInfo, setTempInfo] = useState({});
   const [nextEight, SetNextEight] = useState([]);
+  const [temperature, setTemperature] = useState("");
+  const [temperatureIcon, setTemperatureIcon] = useState("");
+  const [tempChart, setTempChart] = useState([]);
+
+  const getInfo = async () => {
+    try {
+      let res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=a77df68bcd9e098229cb3c8e6441dfbc`
+      );
+      let data = await res.json();
+      // console.log("JSON data:", data);
+
+      const { lon, lat } = data.coord;
+      const { humidity, pressure } = data.main;
+      const { main: weathermood, id } = data.weather[0];
+      const { name } = data;
+      const { country, sunrise, sunset } = data.sys;
+
+      const myNewWeatherInfo = {
+        lon,
+        lat,
+
+        humidity,
+        pressure,
+        weathermood,
+
+        id,
+        name,
+        country,
+        sunrise,
+        sunset,
+      };
+      // console.log("myNewWeatherInfo", myNewWeatherInfo);
+      setTempInfo(myNewWeatherInfo);
+
+      console.log("lat:", myNewWeatherInfo.lat, "lon", myNewWeatherInfo.lon);
+      EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=a77df68bcd9e098229cb3c8e6441dfbc`
-      )
-      .then((res) => {
-        // console.log(res.data);
-        const { lon, lat } = res.data.coord;
-        const { temp, humidity, pressure } = res.data.main;
-        const { main: weathermood, icon, id } = res.data.weather[0];
-        const { name } = res.data;
-        const { country, sunrise, sunset } = res.data.sys;
-        // console.log(`lon${lon} lat${lat}`);
-        const myNewWeatherInfo = {
-          lon,
-          lat,
-          temp,
-          humidity,
-          pressure,
-          weathermood,
-          icon,
-          id,
-          name,
-          country,
-          sunrise,
-          sunset,
-        };
-        console.log("myNewWeatherInfo", myNewWeatherInfo);
-        setTempInfo(myNewWeatherInfo);
-
-        EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
-      });
-  }, []);
-
-  // console.log(searchValue);
+    getInfo();
+  }, [searchValue]);
 
   const EightDay = async (lat, lon) => {
     // console.log(lat, lon);
@@ -52,13 +60,22 @@ const Weather = () => {
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&cnt=6&appid=a77df68bcd9e098229cb3c8e6441dfbc&units=metric`
     );
     let data = await response.json();
-    // console.log("data:", data);
+    // console.log("data:", data.daily);
+    // console.log("data1 Temp:", data.daily[0].temp.day);
+    setTemperature(data.daily[0].temp.day);
+    setTemperatureIcon(data.daily[0].weather[0].icon);
 
     SetNextEight([...data.daily]);
-    // console.log(nextEight);
+    // console.log("nextEight", data.daily);
+    setTempChart([
+      data.daily[0].temp.min,
+      data.daily[0].temp.morn,
+      data.daily[0].temp.day,
+      data.daily[0].temp.max,
+      data.daily[0].temp.eve,
+      data.daily[0].temp.night,
+    ]);
   };
-
-  // let MyLocalTime = new Date().toLocaleTimeString();
 
   return (
     <>
@@ -87,10 +104,21 @@ const Weather = () => {
       </div>
 
       <div>
-        <Forecast tempInfo={tempInfo} nextEight={nextEight} />
+        <Forecast
+          tempInfo={tempInfo}
+          nextEight={nextEight}
+          tempChart={tempChart}
+        />
       </div>
+
       <div>
-        <WeatherCard tempInfo={tempInfo} />
+        <WeatherCard
+          tempInfo={tempInfo}
+          nextEight={nextEight}
+          temperature={temperature}
+          temperatureIcon={temperatureIcon}
+          tempChart={tempChart}
+        />
       </div>
     </>
   );
