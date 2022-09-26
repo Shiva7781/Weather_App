@@ -31,8 +31,8 @@ const Chartjs = ({ nextEight, tempChart }) => {
   const initialState2 = [25, 27, 29, 30, 28, 27];
 
   const initialState = initialState2.map((e) => {
-    var min = e - 4;
-    var max = e + 5;
+    var min = e - 1;
+    var max = e + 1;
 
     return Math.floor(Math.random() * (+max - +min) + +min);
   });
