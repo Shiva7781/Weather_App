@@ -9,7 +9,9 @@
   text-align: center;
   width: 385px;
   margin: auto;
-  margin-top: 7px;
+  margin-top: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: white;
   /* border: 1px solid red; */
   border-radius: 7px;
