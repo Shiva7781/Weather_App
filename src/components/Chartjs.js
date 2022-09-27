@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Chart.css";
 import { Line } from "react-chartjs-2";
 import {
@@ -26,17 +26,7 @@ ChartJS.register(
 
 const Chartjs = ({ nextEight, tempChart }) => {
   // console.log("Chart", nextEight);
-  console.log("tempChart", tempChart);
-
-  const initialState2 = [25, 27, 29, 30, 28, 27];
-
-  const initialState = initialState2.map((e) => {
-    var min = e - 1;
-    var max = e + 1;
-
-    return Math.floor(Math.random() * (+max - +min) + +min);
-  });
-  console.log("initialState:", initialState);
+  // console.log("tempChart", tempChart);
 
   const [labels, setLabels] = useState([
     "9am",
@@ -47,15 +37,12 @@ const Chartjs = ({ nextEight, tempChart }) => {
     "2pm",
   ]);
 
-  const [tempData, setTempData] = useState([...initialState]);
-  // setTempData(initialState);
-
   const [data, setData] = useState({
     labels,
     datasets: [
       {
         label: "Temperature",
-        data: tempData,
+        data: [7, 7, 8, 1, 8, 3],
 
         backgroundColor: "white",
         borderColor: "rgb(28,169,244)",
@@ -67,6 +54,26 @@ const Chartjs = ({ nextEight, tempChart }) => {
       },
     ],
   });
+
+  useEffect(() => {
+    setData({
+      labels,
+      datasets: [
+        {
+          label: "Temperature",
+          data: tempChart,
+
+          backgroundColor: "white",
+          borderColor: "rgb(28,169,244)",
+          tension: "0.5",
+          pointStyle: "circle",
+          pointRadius: 5,
+          pointBorderWidth: 3,
+          // fill: true,
+        },
+      ],
+    });
+  }, [tempChart]);
 
   const options = {
     plugins: {
