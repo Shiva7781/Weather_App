@@ -5,16 +5,60 @@ import WeatherCard from "./WeatherCard";
 import axios from "axios";
 
 const Weather = () => {
-  const [searchValue, setSearchValue] = useState("Pune");
+  const [searchValue, setSearchValue] = useState("");
   const [tempInfo, setTempInfo] = useState({});
   const [nextEight, SetNextEight] = useState([]);
   const [temperature, setTemperature] = useState("");
   const [temperatureIcon, setTemperatureIcon] = useState("");
   const [tempChart, setTempChart] = useState([]);
 
-  useEffect(() => {
-    getInfo();
-  }, [searchValue]);
+  // // //
+  const getLatLong = () => {
+    if ("geolocation" in navigator) {
+      // check if geolocation is supported/enabled on current browser
+      navigator.geolocation.getCurrentPosition(
+        function successCallback(position) {
+          // console.log(position);
+          // for when getting location is a success
+          console.log(
+            "latitude",
+            position.coords.latitude,
+            "longitude",
+            position.coords.longitude
+          );
+
+          const Latitude = position.coords.latitude;
+          const Longitude = position.coords.longitude;
+
+          cityName(Latitude, Longitude);
+        },
+
+        function errorCallback(error_message) {
+          // for when getting location results in an error
+          console.error(
+            "An error has occured while retrieving location",
+            error_message
+          );
+        }
+      );
+    } else {
+      // geolocation is not supported
+      // get your location some other way
+      console.log("geolocation is not enabled on this browser");
+    }
+  };
+  getLatLong();
+  // // //
+
+  const cityName = async (Latitude, Longitude) => {
+    console.log("cityName", Latitude, Longitude);
+    const res = await axios.get(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${Latitude}&lon=${Longitude}&appid=${process.env.REACT_APP_API_KEY}`
+    );
+    const name = res.data.city.name;
+    console.log("data:", res.data);
+    setSearchValue(name);
+  };
 
   const getInfo = async () => {
     try {
@@ -75,6 +119,10 @@ const Weather = () => {
       data.daily[0].temp.night,
     ]);
   };
+
+  useEffect(() => {
+    getInfo();
+  }, [searchValue]);
 
   return (
     <>
