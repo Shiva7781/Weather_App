@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Weather.css";
 import Forecast from "./Forecast";
 import WeatherCard from "./WeatherCard";
+import axios from "axios";
 
 const Weather = () => {
   const [searchValue, setSearchValue] = useState("Pune");
@@ -11,53 +12,56 @@ const Weather = () => {
   const [temperatureIcon, setTemperatureIcon] = useState("");
   const [tempChart, setTempChart] = useState([]);
 
-  const getInfo = async () => {
-    try {
-      let res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=a77df68bcd9e098229cb3c8e6441dfbc`
-      );
-      let data = await res.json();
-      // console.log("JSON data:", data);
-
-      const { lon, lat } = data.coord;
-      const { humidity, pressure } = data.main;
-      const { main: weathermood, id } = data.weather[0];
-      const { name } = data;
-      const { country, sunrise, sunset } = data.sys;
-
-      const myNewWeatherInfo = {
-        lon,
-        lat,
-
-        humidity,
-        pressure,
-        weathermood,
-
-        id,
-        name,
-        country,
-        sunrise,
-        sunset,
-      };
-      // console.log("myNewWeatherInfo", myNewWeatherInfo);
-      setTempInfo(myNewWeatherInfo);
-
-      console.log("lat:", myNewWeatherInfo.lat, "lon", myNewWeatherInfo.lon);
-      EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     getInfo();
   }, [searchValue]);
+
+  const getInfo = () => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+      )
+      .then((res) => {
+        let data = res.data;
+
+        // console.log("JSON data:", data);
+
+        const { lon, lat } = data.coord;
+        const { humidity, pressure } = data.main;
+        const { main: weathermood, id } = data.weather[0];
+        const { name } = data;
+        const { country, sunrise, sunset } = data.sys;
+
+        const myNewWeatherInfo = {
+          lon,
+          lat,
+
+          humidity,
+          pressure,
+          weathermood,
+
+          id,
+          name,
+          country,
+          sunrise,
+          sunset,
+        };
+        // console.log("myNewWeatherInfo", myNewWeatherInfo);
+        setTempInfo(myNewWeatherInfo);
+
+        console.log("lat:", myNewWeatherInfo.lat, "lon", myNewWeatherInfo.lon);
+        EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const EightDay = async (lat, lon) => {
     // console.log(lat, lon);
 
     let response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&cnt=6&appid=a77df68bcd9e098229cb3c8e6441dfbc&units=metric`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&cnt=6&appid=${process.env.REACT_APP_API_KEY}&units=metric`
     );
     let data = await response.json();
     // console.log("data:", data.daily);
