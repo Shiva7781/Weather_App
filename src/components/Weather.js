@@ -16,45 +16,40 @@ const Weather = () => {
     getInfo();
   }, [searchValue]);
 
-  const getInfo = () => {
-    axios
-      .get(
+  const getInfo = async () => {
+    try {
+      const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
-      )
-      .then((res) => {
-        let data = res.data;
+      );
 
-        // console.log("JSON data:", data);
+      // console.log("JSON data:", res.data);
 
-        const { lon, lat } = data.coord;
-        const { humidity, pressure } = data.main;
-        const { main: weathermood, id } = data.weather[0];
-        const { name } = data;
-        const { country, sunrise, sunset } = data.sys;
+      const { lon, lat } = res.data.coord;
+      const { humidity, pressure } = res.data.main;
+      const { main: weathermood, id } = res.data.weather[0];
+      const { name } = res.data;
+      const { country, sunrise, sunset } = res.data.sys;
 
-        const myNewWeatherInfo = {
-          lon,
-          lat,
+      const myNewWeatherInfo = {
+        lon,
+        lat,
 
-          humidity,
-          pressure,
-          weathermood,
+        humidity,
+        pressure,
+        weathermood,
 
-          id,
-          name,
-          country,
-          sunrise,
-          sunset,
-        };
-        // console.log("myNewWeatherInfo", myNewWeatherInfo);
-        setTempInfo(myNewWeatherInfo);
+        id,
+        name,
+        country,
+        sunrise,
+        sunset,
+      };
+      // console.log("myNewWeatherInfo", myNewWeatherInfo);
+      setTempInfo(myNewWeatherInfo);
 
-        console.log("lat:", myNewWeatherInfo.lat, "lon", myNewWeatherInfo.lon);
-        EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      console.log("lat:", myNewWeatherInfo.lat, "lon", myNewWeatherInfo.lon);
+      EightDay(myNewWeatherInfo.lat, myNewWeatherInfo.lon);
+    } catch (error) {}
   };
 
   const EightDay = async (lat, lon) => {
