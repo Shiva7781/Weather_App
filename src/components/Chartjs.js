@@ -28,17 +28,15 @@ const Chartjs = ({ nextEight, tempChart }) => {
   // console.log("Chart", nextEight);
   // console.log("tempChart", tempChart);
 
-  const [labels, setLabels] = useState([
-    "9am",
-    "10am",
-    "11am",
-    "12pm",
-    "1pm",
-    "2pm",
-  ]);
-
   const [data, setData] = useState({
-    labels,
+    labels: [
+      ["", "6am"],
+      ["", "9am"],
+      ["", "12pm"],
+      ["", "3pm"],
+      ["", "6pm"],
+      ["", "9pm"],
+    ],
     datasets: [
       {
         label: "Temperature",
@@ -57,7 +55,14 @@ const Chartjs = ({ nextEight, tempChart }) => {
 
   useEffect(() => {
     setData({
-      labels,
+      labels: [
+        [Math.floor(tempChart[0]) + "°", "6am"],
+        [Math.floor(tempChart[1]) + "°", "9am"],
+        [Math.floor(tempChart[2]) + "°", "12pm"],
+        [Math.floor(tempChart[3]) + "°", "3pm"],
+        [Math.floor(tempChart[4]) + "°", "6pm"],
+        [Math.floor(tempChart[5]) + "°", "9pm"],
+      ],
       datasets: [
         {
           label: "Temperature",

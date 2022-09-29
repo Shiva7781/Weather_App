@@ -47,7 +47,10 @@ const Weather = () => {
       console.log("geolocation is not enabled on this browser");
     }
   };
-  getLatLong();
+  // getLatLong();
+  useEffect(() => {
+    getLatLong();
+  }, []);
   // // //
 
   const cityName = async (Latitude, Longitude) => {
