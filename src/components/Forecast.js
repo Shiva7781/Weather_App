@@ -22,6 +22,18 @@ const Forecast = ({ tempInfo, nextEight, tempChart }) => {
   // console.log(nextEight);
   // console.log(nextEight[0].weather[0].icon);
 
+  const localTime = new Date().toUTCString();
+  const Today = localTime[0].concat(localTime[1]).toUpperCase();
+  console.log("Today:", Today);
+
+  const days1 = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const days2 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
+  const days3 = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+  const days4 = ["Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+  const days5 = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
+  const days6 = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  const days7 = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
   return (
     <>
       <div className="Seven_Forecast">
@@ -29,7 +41,25 @@ const Forecast = ({ tempInfo, nextEight, tempChart }) => {
           return (
             <div key={i} className="Day_Forecast">
               {/* <h3>{e.weather[0].icon}</h3> */}
-              <h3>{i === 0 ? "Today" : "Day" + " " + Number(i + 1)}</h3>
+
+              <h3>
+                {Today === "SU"
+                  ? days1[i]
+                  : Today === "MO"
+                  ? days2[i]
+                  : Today === "TU"
+                  ? days3[i]
+                  : Today === "WE"
+                  ? days4[i]
+                  : Today === "TH"
+                  ? days5[i]
+                  : Today === "FR"
+                  ? days6[i]
+                  : Today === "SA"
+                  ? days7[i]
+                  : ""}
+              </h3>
+
               <h3>{e.temp.day}</h3>
               <img
                 src={
