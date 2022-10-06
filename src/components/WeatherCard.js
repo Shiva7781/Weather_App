@@ -3,104 +3,77 @@ import React from "react";
 import Chartjs from "./Chartjs";
 import "./Weather.css";
 
-const WeatherCard = ({
-  tempInfo,
-  nextEight,
-  temperature,
-  temperatureIcon,
-  tempChart,
-}) => {
-  // const [weatherSate, setWeatherState] = useState("");
+const WeatherCard = ({ currentData, nextEight, comingHrs, graphArr }) => {
+  // console.log("currentData", currentData);
+  // console.log("WeatherCard", nextEight);
+  // console.log('comingHrs:', comingHrs)
+  // console.log('graphArr:', graphArr)
 
+  // console.log("currentData", currentData);
   const {
-    // lon,
-    // lat,
-
-    // humidity,
-    // pressure,
-    // weathermood,
-
-    // id,
-    // name,
-    // country,
+    Temp,
+    Icon,
+    Weathermood,
+    Description,
+    Pressure,
+    Humidity,
     sunrise,
     sunset,
-  } = tempInfo;
-
-  // useEffect(() => {
-  //   if (weathermood) {
-  //     switch (weathermood) {
-  //       case "Clouds":
-  //         setWeatherState("wi-day-cloud");
-  //         break;
-
-  //       case "Haze":
-  //         setWeatherState("wi-day-cloud");
-  //         break;
-
-  //       case "Clear":
-  //         setWeatherState("wi-day-cloud");
-  //         break;
-
-  //       default:
-  //         setWeatherState("wi-day-cloud");
-  //         break;
-  //     }
-  //   }
-  // }, [weathermood]);
+  } = currentData;
 
   // Converting the seconds into time
   let secR = sunrise;
   let dateR = new Date(secR * 1000);
-  let timeR = `${dateR.getHours()}:${dateR.getMinutes()}`;
+  let SunR = `${dateR.getHours()}:${dateR.getMinutes()}`;
 
   let secS = sunset;
   let dateS = new Date(secS * 1000);
-  let timeS = `${dateS.getHours()}:${dateS.getMinutes()}`;
-
-  // let MyLocalTime = new Date().toLocaleTimeString();
-  // console.log("MyLocalTime:", nextEight[0]);
+  let SunS = `${dateS.getHours()}:${dateS.getMinutes()}`;
 
   return (
     <>
       <div className="Bottom">
         <div className="Bottom_Top">
-          <h1>{Math.floor(temperature)}°C</h1>
-          <div className="Big_Icon">
-            <img
-              src={
-                "http://openweathermap.org/img/wn/" +
-                temperatureIcon +
-                "@2x.png"
-              }
-              alt="S"
-            ></img>
+          <div className="Bottom_Temp">
+            <h1>{Math.floor(Temp)}°C</h1>
+
+            <div className="Big_Icon">
+              <img
+                src={"http://openweathermap.org/img/wn/" + Icon + "@2x.png"}
+                alt=""
+              ></img>
+            </div>
           </div>
+          <h2>{Weathermood}</h2>
         </div>
 
-        <div className="Graph">
-          <Chartjs tempChart={tempChart} />
-        </div>
+        {/* <div className="Graph">
+          <Chartjs
+            comingHrs={comingHrs}
+            graphArr={graphArr}
+            nextEight={nextEight}
+          />
+        </div> */}
 
         <div className="Two_Way">
           <div className="Single">
             <h3> Pressure </h3>
-            <h4> {tempInfo.pressure} hpa</h4>
+            <h4> {Pressure} hpa</h4>
           </div>
           <div className="Single">
             <h3> Humidiy </h3>
-            <h4> {tempInfo.humidity} %</h4>
+            <h4> {Humidity} %</h4>
           </div>
         </div>
 
         <div className="Sun">
           <div className="Rise_Set">
-            <h3>Sunrise</h3>
-            <p>{timeR}am</p>
+            <h3>sunrise</h3>
+            <p>{SunR}am</p>
           </div>
           <div className="Rise_Set">
-            <h3>Sunset</h3>
-            <p>{timeS}pm</p>
+            <h3>sunset</h3>
+            <p>{SunS}pm</p>
           </div>
         </div>
 
