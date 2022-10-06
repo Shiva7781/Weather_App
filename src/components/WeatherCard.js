@@ -47,13 +47,13 @@ const WeatherCard = ({ currentData, nextEight, comingHrs, graphArr }) => {
           <h2>{Weathermood}</h2>
         </div>
 
-        {/* <div className="Graph">
+        <div className="Graph">
           <Chartjs
-            comingHrs={comingHrs}
             graphArr={graphArr}
             nextEight={nextEight}
+            comingHrs={comingHrs}
           />
-        </div> */}
+        </div>
 
         <div className="Two_Way">
           <div className="Single">

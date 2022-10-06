@@ -24,18 +24,19 @@ ChartJS.register(
   // Filler
 );
 
-const Chartjs = ({ nextEight, tempChart }) => {
-  // console.log("Chart", nextEight);
-  // console.log("tempChart", tempChart);
+const Chartjs = ({ graphArr, nextEight, comingHrs }) => {
+  // console.log("graphArr:", graphArr);
+  // console.log("nextEight:", nextEight);
+  // console.log("comingHrs:", comingHrs);
 
   const [data, setData] = useState({
     labels: [
-      ["", "6am"],
-      ["", "9am"],
-      ["", "12pm"],
-      ["", "3pm"],
-      ["", "6pm"],
-      ["", "9pm"],
+      ["" + "°", "3am"],
+      ["" + "°", "7am"],
+      ["" + "°", "11am"],
+      ["" + "°", "3pm"],
+      ["" + "°", "7pm"],
+      ["" + "°", "11pm"],
     ],
     datasets: [
       {
@@ -56,17 +57,17 @@ const Chartjs = ({ nextEight, tempChart }) => {
   useEffect(() => {
     setData({
       labels: [
-        [Math.floor(tempChart[0]) + "°", "6am"],
-        [Math.floor(tempChart[1]) + "°", "9am"],
-        [Math.floor(tempChart[2]) + "°", "12pm"],
-        [Math.floor(tempChart[3]) + "°", "3pm"],
-        [Math.floor(tempChart[4]) + "°", "6pm"],
-        [Math.floor(tempChart[5]) + "°", "9pm"],
+        [Math.floor(graphArr[0]) + "°", "3am"],
+        [Math.floor(graphArr[1]) + "°", "7am"],
+        [Math.floor(graphArr[2]) + "°", "11am"],
+        [Math.floor(graphArr[3]) + "°", "3pm"],
+        [Math.floor(graphArr[4]) + "°", "7pm"],
+        [Math.floor(graphArr[5]) + "°", "11pm"],
       ],
       datasets: [
         {
           label: "Temperature",
-          data: tempChart,
+          data: graphArr,
 
           backgroundColor: "white",
           borderColor: "rgb(28,169,244)",
@@ -78,7 +79,7 @@ const Chartjs = ({ nextEight, tempChart }) => {
         },
       ],
     });
-  }, [tempChart]);
+  }, [graphArr]);
 
   const options = {
     plugins: {

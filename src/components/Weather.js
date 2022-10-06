@@ -97,7 +97,7 @@ const Weather = () => {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}&units=metric`
       );
       let data = await response.json();
-      // console.log("Data", data);
+      console.log("Data", data);
 
       // console.log("upcomingDays:", data.daily);
       // console.log("comingDewPoint:", data.daily[0].dew_point, data.daily[7].dew_point);
@@ -123,11 +123,11 @@ const Weather = () => {
 
       // console.log("graphArr:", data.daily[0].temp);
       setGraphArr([
-        data.daily[0].temp.day,
-        data.daily[0].temp.eve,
-        data.daily[0].temp.max,
         data.daily[0].temp.min,
         data.daily[0].temp.morn,
+        data.daily[0].temp.day,
+        data.daily[0].temp.max,
+        data.daily[0].temp.eve,
         data.daily[0].temp.night,
       ]);
     } catch (error) {
