@@ -2,17 +2,46 @@ import React, { useEffect, useState } from "react";
 import "./Weather.css";
 import WeatherCard from "./WeatherCard";
 
-const Forecast = ({ nextEight, currentData, comingHrs, graphArr }) => {
-  // console.log("Forecast fn nextEight", nextEight);
-  // console.log("comingDewPoint:", nextEight[0].dew_point, nextEight[7].dew_point);
-  // console.log("comingTemp:", nextEight[0].temp.day, nextEight[7].temp.day);
-  // console.log("comingIcon:", nextEight[0].weather[0].icon, nextEight[7].weather[0].icon);
-  // console.log("comingWeathermood:", nextEight[0].weather[0].main, nextEight[7].weather[0].main);
+const Forecast = ({ nextEight, currentData, graphArr }) => {
+  // console.log("nextEight:", nextEight.length > 1 ? nextEight : "Loading");
 
-  // const day = nextEight[0].dew_point
-  // console.log("comingDewPoint:", nextEight[0].dew_point, nextEight[7].dew_point);
+  const [value, setValue] = useState(0);
+  const [newGraphArr, setNewGraphArr] = useState([]);
+  const [newCurrentD, setNewCurrentD] = useState({});
+
+  // console.log("value:", value);
+  // console.log("newGraphArr:", newGraphArr);
+  // console.log("newCurrentD:", newCurrentD);
+
+  useEffect(() => {
+    setNewGraphArr(
+      nextEight.length > 1
+        ? [
+            nextEight[value].temp.min,
+            nextEight[value].temp.morn,
+            nextEight[value].temp.day,
+            nextEight[value].temp.max,
+            nextEight[value].temp.eve,
+            nextEight[value].temp.night,
+          ]
+        : null
+    );
+
+    setNewCurrentD(
+      nextEight.length > 1
+        ? {
+            ["Pressure"]: nextEight[value].pressure,
+            ["Humidity"]: nextEight[value].humidity,
+            ["Sunrise"]: nextEight[value].sunrise,
+            ["Sunset"]: nextEight[value].sunset,
+          }
+        : null
+    );
+  }, [value]);
 
   const localTime = new Date().toUTCString();
+  // console.log("localTime:", localTime);
+
   const Today = localTime[0].concat(localTime[1]).toUpperCase();
   // console.log("Today:", Today);
 
@@ -24,33 +53,12 @@ const Forecast = ({ nextEight, currentData, comingHrs, graphArr }) => {
   const days6 = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
   const days7 = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // console.log("graphArr:", nextEight[0].temp);
-
-  // const [newGraphData, setNewGraphData] = useState([...graphArr]);
-
-  // useEffect(() => {
-  //   setNewGraphData(
-  //     nextEight[0].temp.min,
-  //     nextEight[0].temp.morn,
-  //     nextEight[0].temp.day,
-  //     nextEight[0].temp.max,
-  //     nextEight[0].temp.eve,
-  //     nextEight[0].temp.night
-  //   );
-  // }, [newGraphData]);
-
-  // console.log("newGraphData:", newGraphData);
-
   return (
     <>
       <div className="ComingDays_Forecast">
         {nextEight.map((e, i) => {
           return (
-            <div
-              key={i}
-              className="Day_Forecast"
-              // onClick={console.log("Forecast")}
-            >
+            <div key={i} className="Day_Forecast" onClick={() => setValue(i)}>
               <h3>
                 {Today === "SU"
                   ? days1[i]
@@ -83,15 +91,14 @@ const Forecast = ({ nextEight, currentData, comingHrs, graphArr }) => {
         })}
       </div>
 
-      {/* <div>
+      <div>
         <WeatherCard
           currentData={currentData}
-          nextEight={nextEight}
-          comingHrs={comingHrs}
+          newCurrentD={newCurrentD}
           graphArr={graphArr}
-          newGraphData={newGraphData}
+          newGraphArr={newGraphArr}
         />
-      </div> */}
+      </div>
     </>
   );
 };

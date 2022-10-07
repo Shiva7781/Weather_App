@@ -10,7 +10,7 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  // Filler,
+  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -20,14 +20,16 @@ ChartJS.register(
   Legend,
   CategoryScale,
   LinearScale,
-  PointElement
-  // Filler
+  PointElement,
+  Filler
 );
 
-const Chartjs = ({ graphArr, nextEight, comingHrs }) => {
+const Chartjs = ({ graphArr, newGraphArr }) => {
   // console.log("graphArr:", graphArr);
-  // console.log("nextEight:", nextEight);
-  // console.log("comingHrs:", comingHrs);
+  // console.log("newGraphArr:", newGraphArr);
+
+  let displayGraph = newGraphArr ? newGraphArr : graphArr;
+  // console.log("displayGraph:", displayGraph);
 
   const [data, setData] = useState({
     labels: [
@@ -45,11 +47,15 @@ const Chartjs = ({ graphArr, nextEight, comingHrs }) => {
 
         backgroundColor: "white",
         borderColor: "rgb(28,169,244)",
-        tension: "0.5",
+        tension: "0.4",
         pointStyle: "circle",
         pointRadius: 5,
         pointBorderWidth: 3,
-        // fill: true,
+        fill: {
+          target: "origin",
+          above: "rgb(75,192,192,0.7",
+          below: "gray",
+        },
       },
     ],
   });
@@ -57,29 +63,33 @@ const Chartjs = ({ graphArr, nextEight, comingHrs }) => {
   useEffect(() => {
     setData({
       labels: [
-        [Math.floor(graphArr[0]) + "°", "3am"],
-        [Math.floor(graphArr[1]) + "°", "7am"],
-        [Math.floor(graphArr[2]) + "°", "11am"],
-        [Math.floor(graphArr[3]) + "°", "3pm"],
-        [Math.floor(graphArr[4]) + "°", "7pm"],
-        [Math.floor(graphArr[5]) + "°", "11pm"],
+        [Math.floor(displayGraph[0]) + "°", "3am"],
+        [Math.floor(displayGraph[1]) + "°", "7am"],
+        [Math.floor(displayGraph[2]) + "°", "11am"],
+        [Math.floor(displayGraph[3]) + "°", "3pm"],
+        [Math.floor(displayGraph[4]) + "°", "7pm"],
+        [Math.floor(displayGraph[5]) + "°", "11pm"],
       ],
       datasets: [
         {
           label: "Temperature",
-          data: graphArr,
+          data: displayGraph,
 
           backgroundColor: "white",
           borderColor: "rgb(28,169,244)",
-          tension: "0.5",
+          tension: "0.4",
           pointStyle: "circle",
           pointRadius: 5,
           pointBorderWidth: 3,
-          // fill: true,
+          fill: {
+            target: "origin",
+            above: "rgb(75,192,192,0.7",
+            below: "gray",
+          },
         },
       ],
     });
-  }, [graphArr]);
+  }, [displayGraph]);
 
   const options = {
     plugins: {

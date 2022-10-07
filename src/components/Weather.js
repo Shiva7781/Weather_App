@@ -10,10 +10,10 @@ const Weather = () => {
 
   const [nextEight, SetNextEight] = useState([]);
   const [currentData, setCurrentData] = useState({});
-  const [comingHrs, setComingHrs] = useState([]);
   const [graphArr, setGraphArr] = useState([]);
 
-  // // //
+  /** Auto Detecting User Geolocation **/
+
   useEffect(() => {
     getLatLong();
   }, []);
@@ -52,7 +52,8 @@ const Weather = () => {
       console.log("geolocation is not enabled on this browser");
     }
   };
-  // //
+
+  /** Fetching City Name **/
 
   const cityName = async (Latitude, Longitude) => {
     // console.log("cityName", Latitude, Longitude);
@@ -64,7 +65,8 @@ const Weather = () => {
     const name = res.data.city.name;
     setSearchValue(name);
   };
-  // // //
+
+  /** Fetching City Name **/
 
   useEffect(() => {
     getInfo();
@@ -88,6 +90,8 @@ const Weather = () => {
     }
   };
 
+  /** Fetching All Data **/
+
   const EightDay = async (lon, lat) => {
     try {
       // console.log("EightDay()", lon, lat);
@@ -97,10 +101,9 @@ const Weather = () => {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${process.env.REACT_APP_API_KEY}&units=metric`
       );
       let data = await response.json();
-      console.log("Data", data);
+      // console.log("Data", data);
 
       // console.log("upcomingDays:", data.daily);
-      // console.log("comingDewPoint:", data.daily[0].dew_point, data.daily[7].dew_point);
       // console.log("comingTemp:", data.daily[0].temp.day, data.daily[7].temp.day);
       // console.log("comingIcon:", data.daily[0].weather[0].icon, data.daily[7].weather[0].icon);
       // console.log("comingWeathermood:", data.daily[0].weather[0].main, data.daily[7].weather[0].main);
@@ -112,14 +115,12 @@ const Weather = () => {
         Icon: data.current.weather[0].icon,
         Weathermood: data.current.weather[0].main,
         Description: data.current.weather[0].description,
-        Pressure: data.current.pressure,
-        Humidity: data.current.humidity,
+
+        pressure: data.current.pressure,
+        humidity: data.current.humidity,
         sunrise: data.current.sunrise,
         sunset: data.current.sunset,
       });
-
-      // console.log("comingHrs:", "afternoon", data.hourly[0].temp);
-      setComingHrs([...data.hourly]);
 
       // console.log("graphArr:", data.daily[0].temp);
       setGraphArr([
@@ -137,7 +138,7 @@ const Weather = () => {
 
   return (
     <>
-      {/* <div>Weather_App</div> */}
+      {/* <h3>Weather_App</h3> */}
 
       <div className="Search">
         <img
@@ -157,7 +158,7 @@ const Weather = () => {
           src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png"
           alt="Search"
           className="Search_Button"
-          onClick={() => console.log("Click")}
+          onClick={() => console.log("Search")}
         ></img>
       </div>
 
@@ -165,16 +166,6 @@ const Weather = () => {
         <Forecast
           nextEight={nextEight}
           currentData={currentData}
-          comingHrs={comingHrs}
-          graphArr={graphArr}
-        />
-      </div>
-
-      <div>
-        <WeatherCard
-          currentData={currentData}
-          nextEight={nextEight}
-          comingHrs={comingHrs}
           graphArr={graphArr}
         />
       </div>
