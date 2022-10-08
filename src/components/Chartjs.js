@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { weatherContext } from "./Context"; // // //
+
 import "./Chart.css";
 import { Line } from "react-chartjs-2";
 import {
@@ -24,9 +26,11 @@ ChartJS.register(
   Filler
 );
 
-const Chartjs = ({ graphArr, newGraphArr }) => {
-  // console.log("graphArr:", graphArr);
+const Chartjs = ({ newGraphArr }) => {
   // console.log("newGraphArr:", newGraphArr);
+
+  const { graphArr } = useContext(weatherContext);
+  // console.log("graphArr:", graphArr);
 
   let displayGraph = newGraphArr ? newGraphArr : graphArr;
   // console.log("displayGraph:", displayGraph);

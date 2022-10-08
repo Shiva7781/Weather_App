@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import "./Weather.css";
 import Forecast from "./Forecast";
-import WeatherCard from "./WeatherCard";
 import axios from "axios";
 
+import { weatherContext } from "./Context";
+
 const Weather = () => {
-  const [searchValue, setSearchValue] = useState("Nashik");
+  const [searchValue, setSearchValue] = useState("Gorakhpur");
 
   const [nextEight, SetNextEight] = useState([]);
   const [currentData, setCurrentData] = useState({});
@@ -140,35 +141,37 @@ const Weather = () => {
     <>
       {/* <h3>Weather_App</h3> */}
 
-      <div className="Search">
-        <img
-          src="https://media.istockphoto.com/vectors/map-pin-vector-glyph-icon-vector-id1193451471?k=20&m=1193451471&s=612x612&w=0&h=ve7JRaMvw6L1HBiDOTVwfbhHALPPH-nCMCgG0Z_z5NY="
-          alt="Pin"
-          className="Location_Icon"
-        ></img>
-        <input
-          className="Search_Input"
-          type="search"
-          placeholder="Search..."
-          autoComplete="off"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <img
-          src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png"
-          alt="Search"
-          className="Search_Button"
-          onClick={() => console.log("Search")}
-        ></img>
-      </div>
+      <weatherContext.Provider value={{ currentData, graphArr }}>
+        <div className="Search">
+          <img
+            src="https://media.istockphoto.com/vectors/map-pin-vector-glyph-icon-vector-id1193451471?k=20&m=1193451471&s=612x612&w=0&h=ve7JRaMvw6L1HBiDOTVwfbhHALPPH-nCMCgG0Z_z5NY="
+            alt="Pin"
+            className="Location_Icon"
+          ></img>
+          <input
+            className="Search_Input"
+            type="search"
+            placeholder="Search..."
+            autoComplete="off"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <img
+            src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png"
+            alt="Search"
+            className="Search_Button"
+            onClick={() => console.log("Search")}
+          ></img>
+        </div>
 
-      <div>
-        <Forecast
-          nextEight={nextEight}
-          currentData={currentData}
-          graphArr={graphArr}
-        />
-      </div>
+        <div>
+          <Forecast
+            nextEight={nextEight}
+            // currentData={currentData}
+            // graphArr={graphArr}
+          />
+        </div>
+      </weatherContext.Provider>
     </>
   );
 };

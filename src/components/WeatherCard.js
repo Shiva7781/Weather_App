@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Chartjs from "./Chartjs";
 import "./Weather.css";
 
-const WeatherCard = ({ currentData, newCurrentD, graphArr, newGraphArr }) => {
-  // console.log("currentData", currentData);
+import { weatherContext } from "./Context"; // // //
+
+const WeatherCard = ({ newCurrentD, newGraphArr }) => {
   // console.log("newCurrentD:", newCurrentD);
+  // console.log("newGraphArr:", newGraphArr);
+
+  const { currentData } = useContext(weatherContext);
+  // console.log("currentData:", currentData);
 
   const {
     Temp,
@@ -48,7 +53,8 @@ const WeatherCard = ({ currentData, newCurrentD, graphArr, newGraphArr }) => {
         </div>
 
         <div className="Graph">
-          <Chartjs graphArr={graphArr} newGraphArr={newGraphArr} />
+          {/* <Chartjs graphArr={graphArr} newGraphArr={newGraphArr} /> */}
+          <Chartjs newGraphArr={newGraphArr} />
         </div>
 
         <div className="Two_Way">

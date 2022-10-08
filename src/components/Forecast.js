@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Weather.css";
 import WeatherCard from "./WeatherCard";
 
-const Forecast = ({ nextEight, currentData, graphArr }) => {
+// const Forecast = ({ nextEight, currentData, graphArr }) => {
+const Forecast = ({ nextEight }) => {
   // console.log("nextEight:", nextEight.length > 1 ? nextEight : "Loading");
 
   const [value, setValue] = useState(0);
@@ -93,9 +94,9 @@ const Forecast = ({ nextEight, currentData, graphArr }) => {
 
       <div>
         <WeatherCard
-          currentData={currentData}
+          // currentData={currentData}
+          // graphArr={graphArr}
           newCurrentD={newCurrentD}
-          graphArr={graphArr}
           newGraphArr={newGraphArr}
         />
       </div>
