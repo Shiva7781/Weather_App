@@ -4,7 +4,7 @@ import "./Weather.css";
 import Forecast from "./Forecast";
 import axios from "axios";
 
-import { weatherContext } from "./Context";
+import { WeatherContext } from "./Context";
 
 const Weather = () => {
   const [searchValue, setSearchValue] = useState("Gorakhpur");
@@ -17,6 +17,8 @@ const Weather = () => {
 
   useEffect(() => {
     getLatLong();
+
+    // eslint-disable-next-line
   }, []);
 
   const getLatLong = () => {
@@ -71,6 +73,8 @@ const Weather = () => {
 
   useEffect(() => {
     getInfo();
+
+    // eslint-disable-next-line
   }, [searchValue]);
 
   const getInfo = async () => {
@@ -141,7 +145,7 @@ const Weather = () => {
     <>
       {/* <h3>Weather_App</h3> */}
 
-      <weatherContext.Provider value={{ currentData, graphArr }}>
+      <WeatherContext.Provider value={{ currentData, graphArr }}>
         <div className="Search">
           <img
             src="https://media.istockphoto.com/vectors/map-pin-vector-glyph-icon-vector-id1193451471?k=20&m=1193451471&s=612x612&w=0&h=ve7JRaMvw6L1HBiDOTVwfbhHALPPH-nCMCgG0Z_z5NY="
@@ -171,7 +175,7 @@ const Weather = () => {
             // graphArr={graphArr}
           />
         </div>
-      </weatherContext.Provider>
+      </WeatherContext.Provider>
     </>
   );
 };

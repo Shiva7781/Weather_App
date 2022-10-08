@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import Chartjs from "./Chartjs";
 import "./Weather.css";
 
-import { weatherContext } from "./Context"; // // //
+import { WeatherContext } from "./Context"; // // //
 
 const WeatherCard = ({ newCurrentD, newGraphArr }) => {
   // console.log("newCurrentD:", newCurrentD);
   // console.log("newGraphArr:", newGraphArr);
 
-  const { currentData } = useContext(weatherContext);
+  const { currentData } = useContext(WeatherContext);
   // console.log("currentData:", currentData);
 
   const {

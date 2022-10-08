@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { weatherContext } from "./Context"; // // //
+import { WeatherContext } from "./Context"; // // //
 
 import "./Chart.css";
 import { Line } from "react-chartjs-2";
@@ -29,7 +29,7 @@ ChartJS.register(
 const Chartjs = ({ newGraphArr }) => {
   // console.log("newGraphArr:", newGraphArr);
 
-  const { graphArr } = useContext(weatherContext);
+  const { graphArr } = useContext(WeatherContext);
   // console.log("graphArr:", graphArr);
 
   let displayGraph = newGraphArr ? newGraphArr : graphArr;

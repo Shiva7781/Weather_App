@@ -38,6 +38,8 @@ const Forecast = ({ nextEight }) => {
           }
         : null
     );
+
+    // eslint-disable-next-line
   }, [value]);
 
   const localTime = new Date().toUTCString();
