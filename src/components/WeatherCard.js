@@ -3,6 +3,7 @@ import Chartjs from "./Chartjs";
 import "./Weather.css";
 
 import { WeatherContext } from "./Context"; // // //
+import SunMovement from "./SunMovement";
 
 const WeatherCard = ({ newCurrentD, newGraphArr }) => {
   // console.log("newCurrentD:", newCurrentD);
@@ -80,7 +81,7 @@ const WeatherCard = ({ newCurrentD, newGraphArr }) => {
         </div>
 
         <div className="SunMovement">
-          <h3>SUN_MOVEMENT</h3>
+          <SunMovement />
         </div>
       </div>
     </>
