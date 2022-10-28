@@ -1,6 +1,6 @@
 # Weather_App
 
-### Weather app based on automatic geolocation / user input that will show us the current & next upcoming seven day's weather data depending on the user location by using OpenWeather API.
+### Based on user input or automatic geolocation, a weather app will display the sun, moon, and current and forecasted weather for the next seven days, depending on the user's location.
 ### Click on the link to view (https://weather-app-shiva7781.netlify.app/)
 
 
