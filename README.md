@@ -5,6 +5,7 @@
 <br>
 
 ![Screenshot (46)](https://user-images.githubusercontent.com/97456472/198557069-e0762c46-060b-43a9-bc14-d2830a7f9474.png)
+![Screenshot (49)](https://user-images.githubusercontent.com/97456472/199048020-0f5f4341-3033-4a60-88bb-c9f0929410ae.png)
 
 <br>
 
@@ -12,8 +13,6 @@
 
 - ReactJS
 - OpenWeather API
-
-<br>
 
 ## Features:
 
